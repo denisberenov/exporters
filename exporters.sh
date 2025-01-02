@@ -261,4 +261,4 @@ function provisioning_download() {
 
 provisioning_start
 
-./workspace/exporters.sh
+/workspace/exporters.sh
