@@ -1,8 +1,8 @@
-
 #!/bin/bash
-# This file will be sourced in init.sh
-# Namespace functions with provisioning_
 
+# Step 1: Provisioning (from the original provisioning script)
+
+# Namespace functions with provisioning_
 # https://raw.githubusercontent.com/ai-dock/stable-diffusion-webui/main/config/provisioning/default.sh
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
@@ -19,7 +19,7 @@ else
 fi
 echo "Workspace directory set to $WORKSPACE_DIR."
 
-# Вывод текущего состояния файлов
+# Display current file system status
 if [ -d "$WORKSPACE_DIR/stable-diffusion-webui" ]; then
     ls -l "$WORKSPACE_DIR/stable-diffusion-webui" >> "$WORKSPACE_DIR/workspace_contents.txt"
 else
@@ -45,14 +45,13 @@ if [[ "$OS_NAME" == "Darwin" ]] && [ ! -d "$WORKSPACE_DIR/stable-diffusion-webui
 fi
 ##############################
 
-
 DISK_GB_REQUIRED=30
 
 MAMBA_PACKAGES=(
     #"package1"
     #"package2=version"
   )
-  
+
 PIP_PACKAGES=(
     "bitsandbytes==0.41.2.post2"
   )
@@ -79,73 +78,25 @@ EXTENSIONS=(
 )
 
 CHECKPOINT_MODELS=(
-    #"https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
-    #"https://civitai.com/api/download/models/245598?type=Model&format=SafeTensor&size=pruned&fp=fp16"
-    #"https://civitai.com/api/download/models/714092?type=Model&format=SafeTensor&size=full&fp=fp16"
-    #"https://huggingface.co/SG161222/RealVisXL_V4.0/resolve/main/RealVisXL_V4.0.safetensors"
-    #"https://huggingface.co/RunDiffusion/Juggernaut-X-v10/resolve/main/Juggernaut-X-RunDiffusion-NSFW.safetensors"
-    #"https://huggingface.co/RunDiffusion/Juggernaut-XL-v9/resolve/main/Juggernaut-XL_v9_RunDiffusionPhoto_v2.safetensors"
-    #"https://huggingface.co/XpucT/Reliberate/resolve/main/Reliberate_v3.safetensors"
-    #"https://huggingface.co/XpucT/Reliberate/resolve/main/Reliberate_v3-inpainting.safetensors"
-    #Juggernaut "https://civitai.com/api/download/models/782002?type=Model&format=SafeTensor&size=full&fp=fp16"
     "https://huggingface.co/moiu2998/mymo/resolve/3c3093fa083909be34a10714c93874ce5c9dabc4/realisticVisionV60B1_v51VAE.safetensors"
     "https://huggingface.co/XpucT/Deliberate/resolve/main/Deliberate_v6%20(SFW).safetensors"
-    #"https://huggingface.co/XpucT/Deliberate/resolve/main/Deliberate_v6.safetensors"
-    #"https://huggingface.co/XpucT/Deliberate/resolve/main/Deliberate_v6-inpainting.safetensors"
-    #"https://huggingface.co/OzzyGT/RealVisXL_V4.0_inpainting/resolve/main/text_encoder_2/model.fp16.safetensors"
-    #"https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
-    #"https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
-    #"https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
 )
 
 LORA_MODELS=(
     "https://huggingface.co/XpucT/Loras/resolve/main/LowRA_v2.safetensors"
-    "https://civitai.com/api/download/models/364137?type=Model&format=SafeTensor"
 )
 
 VAE_MODELS=(
     #"https://huggingface.co/stabilityai/sd-vae-ft-ema-original/resolve/main/vae-ft-ema-560000-ema-pruned.safetensors"
-    #"https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors"
-    #"https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors"
 )
 
 ESRGAN_MODELS=(
     #"https://huggingface.co/ai-forever/Real-ESRGAN/resolve/main/RealESRGAN_x4.pth"
-    #"https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/resolve/main/4x_foolhardy_Remacri.pth"
-    #"https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth"
 )
 
 CONTROLNET_MODELS=(
     "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11p_sd15_openpose.pth?download=true"
-    "https://huggingface.co/lllyasviel/control_v11f1p_sd15_depth/raw/main/diffusion_pytorch_model.fp16.safetensors"
-    "https://huggingface.co/lllyasviel/control_v11f1p_sd15_depth/raw/main/diffusion_pytorch_model.safetensors"
-    "https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/diffusers_xl_depth_full.safetensors"
-    "https://civitai.com/api/download/models/267540?type=Model&format=SafeTensor&size=full&fp=fp16"
-    "https://huggingface.co/thibaud/controlnet-openpose-sdxl-1.0/resolve/main/OpenPoseXL2.safetensors"
-    "https://huggingface.co/thibaud/controlnet-openpose-sdxl-1.0/resolve/main/control-lora-openposeXL2-rank256.safetensors"
-    "https://huggingface.co/diffusers/controlnet-depth-sdxl-1.0-mid/resolve/main/diffusion_pytorch_model.bin"
-    "https://huggingface.co/lllyasviel/sd_control_collection/blob/main/diffusers_xl_depth_mid.safetensors"
-   # "https://huggingface.co/lllyasviel/sd_control_collection/blob/main/kohya_controllllite_xl_depth.safetensors"
-    #"https://huggingface.co/lllyasviel/sd_control_collection/blob/main/sai_xl_depth_256lora.safetensors"
-    #"https://huggingface.co/lllyasviel/sd_control_collection/blob/main/t2i-adapter_diffusers_xl_depth_midas.safetensors"
-    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_canny-fp16.safetensors"
-    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_depth-fp16.safetensors"
-    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_hed-fp16.safetensors"
-    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_mlsd-fp16.safetensors"
-    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_normal-fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_openpose-fp16.safetensors"
-    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_scribble-fp16.safetensors"
-    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_seg-fp16.safetensors"
-    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_canny-fp16.safetensors"
-    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_color-fp16.safetensors"
-    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_depth-fp16.safetensors"
-    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_keypose-fp16.safetensors"
-    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_openpose-fp16.safetensors"
-    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_seg-fp16.safetensors"
-    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_sketch-fp16.safetensors"
-    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_style-fp16.safetensors"
 )
-
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
@@ -236,39 +187,37 @@ function provisioning_get_models() {
     fi
     
     printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
-    for url in "${arr[@]}"; do
-        printf "Downloading: %s\n" "${url}"
-        provisioning_download "${url}" "${dir}"
-        printf "\n"
+    for model in "${arr[@]}"; do
+        modelname="${model##*/}"
+        modelname="${modelname%?*}"
+        local tmpname="${dir}/${modelname}"
+        if [[ ! -f $tmpname ]]; then
+            echo "Downloading model: $model"
+            curl -fsSL "$model" -o "$tmpname" &
+        else
+            printf "File %s already exists, skipping...\n" "${model}"
+        fi
     done
 }
 
 function provisioning_print_header() {
-    printf "\n##############################################\n#                                            #\n#          Provisioning container            #\n#                                            #\n#         This will take some time           #\n#                                            #\n# Your container will be ready on completion #\n#                                            #\n##############################################\n\n"
-    if [[ $DISK_GB_ALLOCATED -lt $DISK_GB_REQUIRED ]]; then
-        printf "WARNING: Your allocated disk size (%sGB) is below the recommended %sGB - Some models will not be downloaded\n" "$DISK_GB_ALLOCATED" "$DISK_GB_REQUIRED"
-    fi
+    echo "Starting provisioning..."
+    echo "Workspace: $WORKSPACE"
+    echo "Disk Space Available: ${DISK_GB_ALLOCATED}GB (Required: ${DISK_GB_REQUIRED}GB)"
 }
 
 function provisioning_print_end() {
-    printf "\nProvisioning complete:  Web UI will start now\n\n"
-}
-
-# Download from $1 URL to $2 file path
-function provisioning_download() {
-    wget -qnc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
+    echo "Provisioning finished."
 }
 
 provisioning_start
 
-#!/bin/bash
-
-# Step 1: Start Node Exporter
+# Step 2: Start Node Exporter
 echo "Starting Node Exporter..."
 /usr/local/bin/node_exporter --web.listen-address=":9100" > /workspace/node_exporter.log 2>&1 &
 NODE_EXPORTER_PID=$!
 
-# Step 2: Start Blackbox Exporter
+# Step 3: Start Blackbox Exporter
 echo "Starting Blackbox Exporter..."
 cat <<EOF > /workspace/blackbox.yml
 modules:
@@ -279,7 +228,7 @@ EOF
 /usr/local/bin/blackbox_exporter --config.file=/workspace/blackbox.yml --web.listen-address=":9115" > /workspace/blackbox_exporter.log 2>&1 &
 BLACKBOX_EXPORTER_PID=$!
 
-# Step 3: Start Prometheus Aggregate Exporter
+# Step 4: Start Prometheus Aggregate Exporter
 echo "Starting Prometheus Aggregate Exporter..."
 /usr/local/bin/prometheus-aggregate-exporter \
   -targets http://localhost:9100/metrics,http://localhost:9115/metrics \
