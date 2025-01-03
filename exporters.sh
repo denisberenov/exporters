@@ -259,8 +259,6 @@ function provisioning_download() {
     wget -qnc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
 }
 
-provisioning_start
-
 # Step 2: Start Node Exporter
 echo "Starting Node Exporter..."
 /usr/local/bin/node_exporter --web.listen-address=":9100" > /workspace/node_exporter.log 2>&1 &
@@ -287,3 +285,5 @@ AGGREGATE_EXPORTER_PID=$!
 # Wait for all processes
 echo "Monitoring services are starting. Waiting for processes to stay active..."
 wait $NODE_EXPORTER_PID $BLACKBOX_EXPORTER_PID $AGGREGATE_EXPORTER_PID
+
+provisioning_start
