@@ -285,6 +285,6 @@ AGGREGATE_EXPORTER_PID=$!
 # Wait for all processes
 echo "Monitoring services are starting. Waiting for processes to stay active..."
 # wait $NODE_EXPORTER_PID $BLACKBOX_EXPORTER_PID $AGGREGATE_EXPORTER_PID
-sleep 30
+sleep 150
 
 provisioning_start
